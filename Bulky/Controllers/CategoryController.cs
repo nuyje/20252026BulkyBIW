@@ -25,5 +25,10 @@ namespace Bulky.Controllers
             //de view (index). In de view gaan we dan deze list opvangen. 
             return View(objCategoryList); 
         }
+
+        public IActionResult Create()
+        {
+            return View(); 
+        }
     }
 }
