@@ -30,5 +30,28 @@ namespace Bulky.Controllers
         {
             return View(); 
         }
+
+        [HttpPost]
+        public IActionResult Create(Category obj)
+        {
+            if (obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("Name", "DisplayOrder cannot exactly match the Name."); 
+            }
+            if (obj.Name!=null && obj.Name.ToLower() == "test")
+            {
+                ModelState.AddModelError("", "Test is not a valid category name.");
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Category");
+            }
+
+            return View(); 
+
+            
+        }
     }
 }
